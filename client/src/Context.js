@@ -1,4 +1,5 @@
 import React, { Component, createContext } from 'react';
+import Cookies from 'js-cookie';
 import Data from './Data';
 
 // create context
@@ -16,16 +17,19 @@ export class CourseContextProvider extends Component {
     }
 
     state = {
-        authenticatedUser: null
-    }
+      authenticatedUser: null,
+    };
     
     render() {
-        const { authenticatedUser } = this.state;
+      const { authenticatedUser } = this.state;
+      console.log(authenticatedUser);
+
         const value = {
             authenticatedUser,
             data: this.data,
             actions: {
-                
+                signIn: this.signIn,
+                signOut: this.signOut,
             }
         
         };
@@ -35,22 +39,55 @@ export class CourseContextProvider extends Component {
             </CourseContext.Provider>
         )
 
-    } // end render method
-} //End class provider
+    } // END render method
+
+    /**
+    * signIn will be called in signIn component
+    * signIn uses credentials to call the getUser() method in Data.js.
+    * @param {username, password} 
+    * @return {name, username}- example: Henry, nicoya00
+    */
+    signIn = async (username, password) => {
+      const user = await this.data.getUser(username, password);
+      console.log('USERS:'+ user);
+      if (user !== null) {
+        this.setState(()=>{
+          return {
+            authenticatedUser: user,
+          };
+        });
+
+        // set  cookie expiration 1 day
+        Cookies.set(
+            'authenticatedUser',
+             JSON.stringify(user), 
+             { expires: 1}
+             );
+
+        };
+
+      return user;
+
+    }
+
+    // Signs out the user and set delete cookies
+    signOut = () => {
+        this.setState(()=> {
+          return{
+            authenticatedUser: null,
+          };
+        });
+        Cookies.remove('authenticatedUser');
+      }
+    
+
+
+
+} //End class Provider
 
 export const Consumer = CourseContext.Consumer;
 
-// export function withContext(Component) {
-    // return function ContextComponent(props) {
-    //   return (
-        // <Context.Consumer>
-         // {/* {/* {context => <Component {...props} context={context} />} */} */}
-       // {/* </Context.Consumer> */}
-    //   );
-    // }
-//   }
-//   
-  export default CourseContextProvider;
+export default CourseContextProvider;
   
 
 
