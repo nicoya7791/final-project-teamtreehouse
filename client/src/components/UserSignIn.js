@@ -30,9 +30,7 @@ const UserSignIn = () => {
       }       
       
       const handleSubmit = (event) => {
-          event.preventDefault();
           const { from } = history.location.state || { from: { pathname: '/' } };
-          console.log('FROM: '+from);
           context.actions.signIn(username, password)
             .then( user => {
               if( user === null) {
@@ -71,7 +69,7 @@ const UserSignIn = () => {
 }
 
 // Handle validation erros
-function ErrorsDisplay({ errors }) {
+export function ErrorsDisplay({ errors }) {
     let errorsDisplay = null;
   
     if (errors.length) {

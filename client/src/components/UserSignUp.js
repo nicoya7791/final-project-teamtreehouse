@@ -42,45 +42,45 @@ const UserSignUP = () => {
     console.log('name:'+ firstName);
 
     const handleSubmit = (event) => {
-        event.preventDefault();
             // Create user
         const user = {
             firstName,
             lastName,
-            username: emailAddress,
+            emailAddress,
             password,
         }   
 
-        context.data.createUser(user)
-        .then( errors => {
-          if (errors.length) {
-            setErrors(errors)
-          } else {
-            context.actions.signIn(emailAddress, password)
-              .then(() => {
-                history.push('/courses');    
-              });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-         // context.history.push('/error');
-        });
+        if( password !== confirmPassword) {
+          setErrors(['Passwords your entered do not match'])
+        } else {
+          context.data.createUser(user)
+          .then( errors => {
+            if (errors.length) {
+              setErrors(errors)
+            } else {
+              context.actions.signIn(emailAddress, password)
+                .then(() => {
+                  console.log(user);
+                  history.push('/courses');    
+                });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+           // context.history.push('/error');
+          });
   
-  
+        }
     }
 
     const handleCancel = () => {
         history.push('/');
     }
 
-    
-
-
     return (
         <div className='form--centered'>
             <h2>Sign Up</h2>
-
+            <ErrorsDisplay errors={errors} />
             <form onSubmit={ handleSubmit }>
                 <label htmlFor='firstName'>First Name</label>
                 <input
@@ -129,5 +129,27 @@ const UserSignUP = () => {
 
     )
 }
+
+
+// Handle validation erros
+export function ErrorsDisplay({ errors }) {
+  let errorsDisplay = null;
+
+  if (errors.length) {
+    errorsDisplay = (
+      <div>
+        <h2 className="validation--errors--label">Validation errors</h2>
+        <div className="validation-errors">
+          <ul>
+            {errors.map((error, i) => <li key={i}>{error}</li>)}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
+  return errorsDisplay;
+}
+
 
 export default UserSignUP;
