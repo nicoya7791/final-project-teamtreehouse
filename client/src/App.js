@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import CourseDetail from './components/CourseDetail';
 import UserSignIn from "./components/UserSignIn";
 import UserSignUP from "./components/UserSignUp";
+import CreateCourse from "./components/CreateCourse";
 
 function App() {
   return (
@@ -14,11 +15,13 @@ function App() {
       <Header />
       <main>
         <Switch>
-          <Route exact path='/'  component={ Courses } />
-          <Redirect exact from='/courses' to='/' />
+          <Route exact path='/courses'  component={ Courses } />
+          <Redirect exact from='/' to='/courses' />
           <Route exact path='/courses/:id' component={ CourseDetail } />
           <Route path='/signin' component={ UserSignIn } />
           <Route path='/signup' component={ UserSignUP} />
+          <Route exact path='/course/create' component={ CreateCourse } />
+
         </Switch>
       </main>
     </Router>
