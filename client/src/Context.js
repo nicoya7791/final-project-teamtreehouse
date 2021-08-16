@@ -22,8 +22,6 @@ export class CourseContextProvider extends Component {
     
     render() {
       const { authenticatedUser } = this.state;
-      console.log(authenticatedUser);
-
         const value = {
             authenticatedUser,
             data: this.data,
@@ -49,7 +47,6 @@ export class CourseContextProvider extends Component {
     */
     signIn = async (username, password) => {
       const user = await this.data.getUser(username, password);
-      console.log('USERS:'+ user);
       if (user !== null) {
         this.setState(()=>{
           return {
