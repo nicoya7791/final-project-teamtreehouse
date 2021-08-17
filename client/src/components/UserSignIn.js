@@ -13,6 +13,7 @@ const UserSignIn = () => {
     const [ password, setPassword] = useState('');
     const [ errors, setErrors ] = useState([]);
     
+    console.log(username + ' ' + password);
     
     function changeInputValue(event) {
         const inputValue = event.target.value;
@@ -30,14 +31,15 @@ const UserSignIn = () => {
       }       
       
       const handleSubmit = (event) => {
+          console.log('sign in sumbit event called')
           const { from } = history.location.state || { from: { pathname: '/' } };
           context.actions.signIn(username, password)
             .then( user => {
               if( user === null) {
                 setErrors(['Sign-in was unsuccessful']);
               } else {
-                // const { from } = history.location.state || { from: history.goBack()};
                 history.push(from);
+                console.log('Your are now singed In');
               }
             })
             .catch(()=> history.push('/error'));

@@ -58,6 +58,7 @@ const UserSignUP = () => {
             if (errors.length) {
               setErrors(errors)
             } else {
+              console.log('user signed up succesfully');
               context.actions.signIn(emailAddress, password)
                 .then(() => {
                   console.log(user);

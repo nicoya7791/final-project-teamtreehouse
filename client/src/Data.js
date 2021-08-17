@@ -8,6 +8,7 @@ export default class Data {
       method,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
+        //authorization property was added.
       },
     };
 
@@ -28,6 +29,7 @@ export default class Data {
   async getUser(username, password) {
     const response = await this.api(`/users`, 'GET', null, true, {username, password});
     if (response.status === 200) {
+      console.log('from data: get user called' );
       return response.json().then(data => data);
     }
     else if (response.status === 401) {

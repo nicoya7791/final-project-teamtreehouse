@@ -8,6 +8,8 @@ import CourseDetail from './components/CourseDetail';
 import UserSignIn from "./components/UserSignIn";
 import UserSignUP from "./components/UserSignUp";
 import CreateCourse from "./components/CreateCourse";
+import UserSignOut from "./components/UserSignOut";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
           <Route exact path='/courses/:id' component={ CourseDetail } />
           <Route path='/signin' component={ UserSignIn } />
           <Route path='/signup' component={ UserSignUP} />
-          <Route exact path='/course/create' component={ CreateCourse } />
+          <Route path='/signout' component={ UserSignOut } />
+          <Route exact path='/courses/create' component={ CreateCourse } />
+          <Route component={ NotFound } />
 
         </Switch>
       </main>

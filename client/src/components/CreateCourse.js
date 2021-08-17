@@ -12,11 +12,14 @@ const CreateCourse = () => {
     const [courseTitle, setCourseTitle] = useState('');
     const [courseDescription, setCourseDescription]= useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
-    const [matirialsNeeded, setMaterialsNeeded] = useState('');
+    const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
-    const credentials = context.authenticatedUser;
-    console.log(credentials);
+    const { authenticatedUser } = context;
 
+    useEffect( () =>{
+        console.log(authenticatedUser);
+
+    }, [authenticatedUser])
 
     const change = (event) => {
         const value = event.targe.value;
@@ -38,17 +41,17 @@ const CreateCourse = () => {
         }
     }
 
-    const handleSumbit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         const course = {
             courseTitle,
             courseDescription,
             estimatedTime,
-            matirialsNeeded
+            materialsNeeded
         }
 
             //call create course api
-        context.data.createCourse(course, credentials.emailAddress, credentials.password)
+        context.data.createCourse(course, authenticatedUser.emailAddress, authenticatedUser.password)
             .then(errors => {
                 if (errors.length) {
                     setErrors(errors);
@@ -72,34 +75,34 @@ const CreateCourse = () => {
 
 
     return (
-        <div className='wrap'>
+        <div className="wrap">
             <h2>Create Course</h2>
-            <ErrorsDisplay errors={errors} />
-            <form onSubmit={ handleSumbit }>
-                <div className='main--flex'>
+            <h3>{authenticatedUser.emailAddress}</h3>
+            <errorsDisplay errors={errors} />
+            <form onSubmit={handleSubmit}>
+                <div className="main--flex">
                     <div>
                         <label>Course Title</label>
-                        <input id='courseTitle' name='courseTitle' type='text' onChange={ change } value={ courseTitle } ></input>
+                        <input id="courseTitle" name="courseTitle" type="text" onChange={change} value={courseTitle} />
 
-                        <p>By Henry Blandon </p>
+                        <p>By Henry </p>
 
                         <label>Course Description</label>
-                        <textarea id='courseDescription' name='courseDescription' onChange={ change } value={ courseDescription }  ></textarea>
+                        <textarea id="courseDescription" name="courseDescription" onChange={change} value={courseDescription}></textarea>
                     </div>
                     <div>
                         <label>Estimated Time</label>
-                        <input id='estimatedTime' name='estimatedTime' type='text' onChange={ change } value={ estimatedTime } > </input>
+                        <input id="estimatedTime" name="estimatedTime" type="text" onChange={change} value={estimatedTime} />
 
                         <label>Materials Needed</label>
-                        <textarea id='materialsNeeded' name='materialsNeeded' onChange={ change } value={ matirialsNeeded }></textarea>
+                        <textarea id="materialsNeeded" name="materialsNeeded" onChange={change} value={materialsNeeded}></textarea>
                     </div>
                 </div>
-                <button className='button' type='submit'>Create Course</button>
-                <button className='button button-secondary' onClick={ handleCancel }>Cancel</button>
+                <button className="button" type="submit">Create Course</button>
+                <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
             </form>
-
-
         </div>
+    
 
         
     )

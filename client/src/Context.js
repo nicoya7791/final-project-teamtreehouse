@@ -17,11 +17,12 @@ export class CourseContextProvider extends Component {
     }
 
     state = {
-      authenticatedUser: null,
+      authenticatedUser: Cookies.getJSON('authenticatedUser') || null
     };
     
     render() {
       const { authenticatedUser } = this.state;
+      console.log('authenticated user from context:'+ authenticatedUser);
         const value = {
             authenticatedUser,
             data: this.data,
@@ -46,6 +47,7 @@ export class CourseContextProvider extends Component {
     * @return {name, username}- example: Henry, nicoya00
     */
     signIn = async (username, password) => {
+      console.log('from context sign in call');
       const user = await this.data.getUser(username, password);
       if (user !== null) {
         this.setState(()=>{
@@ -69,6 +71,7 @@ export class CourseContextProvider extends Component {
 
     // Signs out the user and set delete cookies
     signOut = () => {
+      console.log('sign out from context');
         this.setState(()=> {
           return{
             authenticatedUser: null,
@@ -76,9 +79,6 @@ export class CourseContextProvider extends Component {
         });
         Cookies.remove('authenticatedUser');
       }
-    
-
-
 
 } //End class Provider
 
