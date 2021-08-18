@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect  } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
 
 // import components
 import Courses from "./components/Courses";
@@ -17,13 +17,12 @@ function App() {
       <Header />
       <main>
         <Switch>
-          <Route exact path='/courses'  component={ Courses } />
-          <Redirect exact from='/' to='/courses' />
-          <Route exact path='/courses/:id' component={ CourseDetail } />
+          <Route exact path='/' component={ Courses } />
+          <Route path='/courses/create' component={ CreateCourse } />
+          <Route path='/courses/:id' component={ CourseDetail } />
           <Route path='/signin' component={ UserSignIn } />
           <Route path='/signup' component={ UserSignUP} />
           <Route path='/signout' component={ UserSignOut } />
-          <Route exact path='/courses/create' component={ CreateCourse } />
           <Route component={ NotFound } />
 
         </Switch>

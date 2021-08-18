@@ -31,6 +31,7 @@ const UserSignIn = () => {
       }       
       
       const handleSubmit = (event) => {
+        event.preventDefault();
           console.log('sign in sumbit event called')
           const { from } = history.location.state || { from: { pathname: '/' } };
           context.actions.signIn(username, password)

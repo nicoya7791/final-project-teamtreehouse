@@ -42,6 +42,7 @@ const UserSignUP = () => {
     console.log('name:'+ firstName);
 
     const handleSubmit = (event) => {
+      event.preventDefault();
             // Create user
         const user = {
             firstName,

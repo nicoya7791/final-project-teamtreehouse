@@ -27,7 +27,7 @@ export default class Data {
   
   // GET request to the protected /users route on the server and returns the user data.
   async getUser(username, password) {
-    const response = await this.api(`/users`, 'GET', null, true, {username, password});
+    const response = await this.api('/users', 'GET', null, true, {username, password});
     if (response.status === 200) {
       console.log('from data: get user called' );
       return response.json().then(data => data);
@@ -63,7 +63,7 @@ export default class Data {
   // Get list of courses
   async getCourses() {
     const response = await this.api('/courses', 'GET');
-    console.log('success');
+    console.log('get courses success from data.js');
 
     if (response.status === 200) {
       return response.json().then(data => data);
@@ -97,8 +97,8 @@ export default class Data {
    * @returns new course
    */
   async createCourse (course, username, password) {
-    const response = await this.api('courses', 'POST', course, true, { username, password });
-
+    const response = await this.api('/courses', 'POST', course, true, { username, password });
+    console.log('create course from data.js');
     if (response.status === 201) {
       return [];
     } else if ( response.status === 400) {
