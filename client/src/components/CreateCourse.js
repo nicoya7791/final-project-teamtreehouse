@@ -10,8 +10,8 @@ const CreateCourse = () => {
     const password = authenticatedUser.password;
     const username = authenticatedUser.emailAddress;
     const userId = authenticatedUser.id;
+    console.log(JSON.stringify(authenticatedUser));
     
-    console.log(context.data.createCourse);
 
     const history = useHistory();
 
@@ -25,7 +25,7 @@ const CreateCourse = () => {
 
 
     const change = (event) => {
-        const value = event.targe.value;
+        const value = event.target.value;
         switch (event.target.name) {
             case "courseTitle":
                 setCourseTitle(value);
@@ -46,7 +46,7 @@ const CreateCourse = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('create course from create course component');
+        console.log('submit create course');
 
         const course = {
             courseTitle,
@@ -63,7 +63,7 @@ const CreateCourse = () => {
                 if (errors.length) {
                     setErrors(errors);
                 } else {
-                    history.push('/courses');
+                    history.push('/');
                 }
             })
             .catch(() => history.push("/error"))
@@ -96,7 +96,7 @@ const CreateCourse = () => {
                         onChange={change} 
                         value={courseTitle} />
 
-                        <p>By Henry </p>
+                        <p>By {authenticatedUser.firstName +" "+ authenticatedUser.lastName} </p>
 
                         <label>Course Description</label>
                         <textarea 

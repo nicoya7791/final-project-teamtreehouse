@@ -22,7 +22,7 @@ export class CourseContextProvider extends Component {
     
     render() {
       const { authenticatedUser } = this.state;
-      console.log('authenticated user from context:'+ authenticatedUser);
+      console.log('authenticated user from context:'+ JSON.stringify(authenticatedUser));
         const value = {
             authenticatedUser,
             data: this.data,

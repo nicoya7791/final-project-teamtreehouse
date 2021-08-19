@@ -3,9 +3,6 @@ import { CourseContext } from '../Context';
 import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'
 
-
-
-
  const CourseDetail = () => {
      // context and histroy hooks initialized 
      const context = useContext(CourseContext);

@@ -13,7 +13,6 @@ const UserSignIn = () => {
     const [ password, setPassword] = useState('');
     const [ errors, setErrors ] = useState([]);
     
-    console.log(username + ' ' + password);
     
     function changeInputValue(event) {
         const inputValue = event.target.value;

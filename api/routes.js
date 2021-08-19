@@ -35,7 +35,8 @@ router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
         res.status(200).json({
             firstName: user.firstName,
             lastName: user.lastName,
-            emailAddress: user.emailAddress
+            emailAddress: user.emailAddress,
+            userId: user.id
         });
     } else {
         res.json({ error: 'user not found' })
