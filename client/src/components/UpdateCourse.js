@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CourseContext } from '../Context';
 import { useHistory, useParams } from 'react-router';
+import ValidationErrors from './ValidationErrors';
 
 
 const UpdateCourse = () => {
@@ -10,7 +11,7 @@ const UpdateCourse = () => {
     const password = authenticatedUser.password;
     const username = authenticatedUser.emailAddress;
     const userId = authenticatedUser.userId;
-
+    console.log(password+ " " + username);
 
     const history = useHistory();
 
@@ -19,7 +20,7 @@ const UpdateCourse = () => {
     const [courseDescription, setCourseDescription]= useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
     
     // const [courseDetail, setCourseDetail] = useState({});
     const [user, setUser] = useState({});
@@ -66,6 +67,37 @@ const UpdateCourse = () => {
         }
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('submit update course');
+
+        const course = {
+            title: courseTitle,
+            description: courseDescription,
+            estimatedTime: estimatedTime,
+            materialsNeeded: materialsNeeded,
+            userId: userId
+        };
+
+
+            //call update course api
+            context.data.updateCourse(course, id, username, password )
+            .then(errors => {
+                if (errors.length) {
+                    setErrors(errors);
+                } else {
+                    history.push(`/courses/${id}`);
+                }
+            })
+            .catch(() => history.push("/error"))
+
+
+          
+
+
+    } //end submit function 
+
+
 
     // returns user to p
     const handleCancel = (e) => {
@@ -78,7 +110,8 @@ const UpdateCourse = () => {
     return (
         <div className='wrap'>
             <h2>Update Course</h2>
-            <form>
+            <ValidationErrors errors={ errors } />
+            <form onSubmit={ handleSubmit }>
                 <div className='main--flex'>
                     <div>
                         <label>Course Title</label>

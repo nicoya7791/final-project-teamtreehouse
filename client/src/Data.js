@@ -112,8 +112,9 @@ export default class Data {
    * @param {course, username, password} 
    * @returns updated course
    */
-  async updateCouse (course, id, username, password) {
-    const response = await this.api(`/course/${id}`, 'PUT', course, true, { username, password } );
+  async updateCourse (course, id, username, password) {
+    const response = await this.api(`/courses/${id}`, 'PUT', course, true, { username, password } );
+    console.log('id:'+id);
 
     if (response.status === 204) {
       return [];
