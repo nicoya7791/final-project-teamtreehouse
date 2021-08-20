@@ -2,16 +2,20 @@ import React, { useState, useEffect, useContext} from 'react';
 import { CourseContext } from '../Context';
 import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'
+import ValidationErrors from './ValidationErrors';
 
  const CourseDetail = () => {
      // context and histroy hooks initialized 
      const context = useContext(CourseContext);
      const history = useHistory();
+     const { authenticatedUser } = context;
+     console.log(JSON.stringify(authenticatedUser));
 
      // course detail variables
      const [courseDetail, setCourseDetail] = useState({});
      const [user, setUser] = useState({});
      const {id} = useParams();
+     const [errors, setErrors] = useState([]);
 
 
      
@@ -32,18 +36,40 @@ import ReactMarkdown from 'react-markdown'
             
     }, [context.data, history, id]);
 
+    // Delete course
+    const handleDeleteCourse = () =>{
+        console.log('handle delete called');
+        const { emailAddress, password} = authenticatedUser;
+        console.log( emailAddress);
+        console.log(password);
+        context.data.deleteCourse(id, emailAddress, password)
+            .then((errors) => {
+                if (errors.length) {
+                    setErrors(errors)
+                } else {
+                    console.log(`course id:${id} deleted`)
+                    history.push('/')
+                }
+            })
+            .catch((err) =>{
+                console.log('Error:', err);
+            });
+
+    }
+
 
     return (
         <React.Fragment>
             <div className='actions--bar'>
                 <div className='wrap'>
                     <a className='button' href={`/courses/${id}/update`}>Update Course</a>
-                    <a className='button' href='/'>Delete Course</a>
+                    <a className='button' onClick={ handleDeleteCourse } href='#'>Delete Course</a>
                     <a className='button button-secondary'  href='/'>Return to List</a>
                 </div>
             </div>
             <div className='wrap'>
                 <h2>Course Details</h2>
+                <ValidationErrors errors={ errors }/>
                 <form>
                     <div className='main--flex'>
                         <div>
