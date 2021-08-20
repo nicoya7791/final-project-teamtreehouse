@@ -9,9 +9,7 @@ const CreateCourse = () => {
     const { authenticatedUser } = context;
     const password = authenticatedUser.password;
     const username = authenticatedUser.emailAddress;
-    const userId = authenticatedUser.id;
-    console.log(JSON.stringify(authenticatedUser));
-    
+    const userId = authenticatedUser.userId;
 
     const history = useHistory();
 
@@ -21,7 +19,6 @@ const CreateCourse = () => {
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
-
 
 
     const change = (event) => {
@@ -49,16 +46,17 @@ const CreateCourse = () => {
         console.log('submit create course');
 
         const course = {
-            courseTitle,
-            courseDescription,
-            estimatedTime,
-            materialsNeeded,
-            userId
+            title: courseTitle,
+            description: courseDescription,
+            estimatedTime: estimatedTime,
+            materialsNeeded: materialsNeeded,
+            userId: userId
         };
 
 
             //call create course api
-        context.data.createCourse(course, username, password )
+        
+            context.data.createCourse(course, username, password )
             .then(errors => {
                 if (errors.length) {
                     setErrors(errors);
@@ -67,6 +65,9 @@ const CreateCourse = () => {
                 }
             })
             .catch(() => history.push("/error"))
+
+
+          
 
 
     } //end submit function 

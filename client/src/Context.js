@@ -22,7 +22,6 @@ export class CourseContextProvider extends Component {
     
     render() {
       const { authenticatedUser } = this.state;
-      console.log('authenticated user from context:'+ JSON.stringify(authenticatedUser));
         const value = {
             authenticatedUser,
             data: this.data,
@@ -51,6 +50,8 @@ export class CourseContextProvider extends Component {
       const user = await this.data.getUser(username, password);
       if (user !== null) {
         this.setState(()=>{
+          // need to set the password because the api getUser does not allow access to it.
+          user.password = password;
           return {
             authenticatedUser: user,
           };
