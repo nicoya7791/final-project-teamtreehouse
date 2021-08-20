@@ -37,7 +37,7 @@ import ReactMarkdown from 'react-markdown'
         <React.Fragment>
             <div className='actions--bar'>
                 <div className='wrap'>
-                    <a className='button' href='/'>Update Course</a>
+                    <a className='button' href={`/courses/${id}/update`}>Update Course</a>
                     <a className='button' href='/'>Delete Course</a>
                     <a className='button button-secondary'  href='/'>Return to List</a>
                 </div>

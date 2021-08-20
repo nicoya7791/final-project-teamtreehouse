@@ -13,12 +13,13 @@ const CreateCourse = () => {
 
     const history = useHistory();
 
-    //  create course variables
+    //  update course variables
     const [courseTitle, setCourseTitle] = useState('');
     const [courseDescription, setCourseDescription]= useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
+    
 
 
     const change = (event) => {
