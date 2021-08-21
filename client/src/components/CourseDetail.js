@@ -9,14 +9,12 @@ import ValidationErrors from './ValidationErrors';
      const context = useContext(CourseContext);
      const history = useHistory();
      const { authenticatedUser } = context;
-     console.log(JSON.stringify(authenticatedUser));
 
      // course detail variables
      const [courseDetail, setCourseDetail] = useState({});
      const [user, setUser] = useState({});
      const {id} = useParams();
      const [errors, setErrors] = useState([]);
-
 
      
 
@@ -40,8 +38,6 @@ import ValidationErrors from './ValidationErrors';
     const handleDeleteCourse = () =>{
         console.log('handle delete called');
         const { emailAddress, password} = authenticatedUser;
-        console.log( emailAddress);
-        console.log(password);
         context.data.deleteCourse(id, emailAddress, password)
             .then((errors) => {
                 if (errors.length) {
@@ -62,9 +58,20 @@ import ValidationErrors from './ValidationErrors';
         <React.Fragment>
             <div className='actions--bar'>
                 <div className='wrap'>
-                    <a className='button' href={`/courses/${id}/update`}>Update Course</a>
-                    <a className='button' onClick={ handleDeleteCourse } href='/'>Delete Course</a>
-                    <a className='button button-secondary'  href='/'>Return to List</a>
+                { authenticatedUser && authenticatedUser.userId === courseDetail.userId ? (
+                    <React.Fragment>
+                        <a className='button' href={`/courses/${id}/update`}>Update Course</a>
+                        <a className='button' onClick={ handleDeleteCourse } href='/'>Delete Course</a>
+                        <a className='button button-secondary'  href='/'>Return to List</a>
+                    </React.Fragment>
+                ):(
+                    <React.Fragment>
+                        <a className="button" href="/">
+                          Return to List
+                        </a>
+                    </React.Fragment>
+
+                )}
                 </div>
             </div>
             <div className='wrap'>
