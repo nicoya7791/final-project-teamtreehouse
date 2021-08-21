@@ -12,6 +12,8 @@ import UserSignOut from "./components/UserSignOut";
 import NotFound from "./components/NotFound";
 import UpdateCourse from "./components/UpdateCourse";
 import PrivateRoute from "./components/PrivateRoute";
+import Forbidden from "./components/Forbidden";
+import UnhandleError from "./components/UnhandleError";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path='/signin' component={ UserSignIn } />
           <Route path='/signup' component={ UserSignUP} />
           <Route path='/signout' component={ UserSignOut } />
+          <Route path='/forbidden' component={ Forbidden } />
+          <Route path='/error' component={ UnhandleError } />
           <Route component={ NotFound } />
 
         </Switch>

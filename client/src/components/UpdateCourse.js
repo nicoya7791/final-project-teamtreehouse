@@ -32,19 +32,22 @@ const UpdateCourse = () => {
         console.log('fetching data to update');
         context.data.getCourse(id)
         .then( response => {
-            if (response){
+            if (response && response.userId === userId){
                 setCourseTitle(response.title);
                 setCourseDescription(response.description);
                 setEstimatedTime(response.estimatedTime);
                 setMaterialsNeeded(response.materialsNeeded);
                 setUser(response.User)
             } else {
-                history.push('/NotFound')
+                history.push('/forbidden')
+            }
+            if(!response){
+                history.push('/');
             }
         })
         .catch( () => history.push('/error'));
             
-    }, [context.data, history, id]);
+    }, [context.data, history, id, userId]);
 
     // update input fields
     const change = (event) => {
@@ -102,7 +105,7 @@ const UpdateCourse = () => {
     // returns user to p
     const handleCancel = (e) => {
         e.preventDefault();
-        history.goBack();
+        history.push(`/courses/${id}`);
     }
     
 
