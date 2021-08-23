@@ -39,7 +39,7 @@ const UpdateCourse = () => {
                 setMaterialsNeeded(response.materialsNeeded);
                 setUser(response.User)
             } else {
-                history.push('/forbidden')
+                history.push('/forbidden');
             }
             if(!response){
                 history.push('/');
@@ -147,7 +147,7 @@ const UpdateCourse = () => {
                             value={ estimatedTime }>
                         </input>
                         <label>Materials Needed</label>
-                        <input
+                        <textarea
                             id='materialsNeeded'
                             type='text'
                             name='materialsNeeded'
@@ -155,7 +155,7 @@ const UpdateCourse = () => {
                             value={ materialsNeeded }
                         >
 
-                        </input>
+                        </textarea>
                     </div>
                 </div>
                 <button className='button' type='submit'>Update Course</button>

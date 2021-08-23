@@ -17,7 +17,7 @@ export class CourseContextProvider extends Component {
     }
 
     state = {
-      authenticatedUser: Cookies.getJSON('authenticatedUser') || null
+      authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
     };
     
     render() {

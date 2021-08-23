@@ -89,9 +89,11 @@ import ValidationErrors from './ValidationErrors';
                             <h3 className="course--detail--title">Estimated Time</h3>
                             <p>{ courseDetail.estimatedTime}</p>
                             <h3 className="course--detail--title">Materials Needed</h3>
-                            <ReactMarkdown className="course--detail--list">
-                                { courseDetail.materialsNeeded }
-                            </ReactMarkdown>
+                            <ul>
+                                <ReactMarkdown className="course--detail--list">
+                                    { courseDetail.materialsNeeded }
+                                </ReactMarkdown>
+                            </ul>
 
                         </div>
 

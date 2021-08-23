@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CourseContext } from '../Context';
+import ValidationErrors from './ValidationErrors';
 
 const UserSignUP = () => {
     // context variable
@@ -13,7 +14,7 @@ const UserSignUP = () => {
     const [lastName, setLastName] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
     const change = (event) => {
@@ -32,7 +33,7 @@ const UserSignUP = () => {
             setPassword(value);
             break;
           case 'confirmPassword':
-              setConfirmPassword(value);
+             setConfirmPassword(value);
               break;  
           default:
             return;
@@ -63,7 +64,7 @@ const UserSignUP = () => {
               context.actions.signIn(emailAddress, password)
                 .then(() => {
                   console.log(user);
-                  history.push('/courses');    
+                  history.push('/');    
                 });
             }
           })
@@ -82,7 +83,7 @@ const UserSignUP = () => {
     return (
         <div className='form--centered'>
             <h2>Sign Up</h2>
-            <ErrorsDisplay errors={errors} />
+            <ValidationErrors errors={errors} />
             <form onSubmit={ handleSubmit }>
                 <label htmlFor='firstName'>First Name</label>
                 <input
@@ -132,26 +133,6 @@ const UserSignUP = () => {
     )
 }
 
-
-// Handle validation erros
-export function ErrorsDisplay({ errors }) {
-  let errorsDisplay = null;
-
-  if (errors.length) {
-    errorsDisplay = (
-      <div>
-        <h2 className="validation--errors--label">Validation errors</h2>
-        <div className="validation-errors">
-          <ul>
-            {errors.map((error, i) => <li key={i}>{error}</li>)}
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
-  return errorsDisplay;
-}
 
 
 export default UserSignUP;

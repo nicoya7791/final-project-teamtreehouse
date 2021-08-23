@@ -1,8 +1,9 @@
 import React, { useState, useContext} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { CourseContext } from '../Context';
+import ValidationErrors from './ValidationErrors';
 
-const UserSignIn = () => {
+const UserSignIn = (props) => {
 
     // context and histroy hooks initialized 
     const context = useContext(CourseContext);
@@ -32,12 +33,15 @@ const UserSignIn = () => {
       const handleSubmit = (event) => {
         event.preventDefault();
           console.log('sign in sumbit event called')
-          const { from } = history.location.state || { from: { pathname: '/' } };
+          const { from } = props.location.state || { from: { pathname: '/' } };
+          
+          // const { from } = history.location.state || { from: history.goBack() };// this line need to be fixed
           context.actions.signIn(username, password)
             .then( user => {
               if( user === null) {
                 setErrors(['Sign-in was unsuccessful']);
               } else {
+                console.log(props);
                 history.push(from);
                 console.log('Your are now singed In');
               }
@@ -55,7 +59,7 @@ const UserSignIn = () => {
     return (
         <div className='form--centered'>
             <h2>Sign In</h2>
-            <ErrorsDisplay errors={errors} />
+            <ValidationErrors errors={errors} />
             <form onSubmit={handleSubmit}>
                 <label htmlFor='emailAdrdress'>Email Address</label>
                 <input id='emailAddress' name='username' type='email' onChange={ changeInputValue } value={ username }></input>
@@ -70,26 +74,6 @@ const UserSignIn = () => {
     )
 }
 
-// Handle validation erros
-export function ErrorsDisplay({ errors }) {
-    let errorsDisplay = null;
-  
-    if (errors.length) {
-      errorsDisplay = (
-        <div>
-          <h2 className="validation--errors--label">Validation errors</h2>
-          <div className="validation-errors">
-            <ul>
-              {errors.map((error, i) => <li key={i}>{error}</li>)}
-            </ul>
-          </div>
-        </div>
-      );
-    }
-  
-    return errorsDisplay;
-  }
-  
 
 
 export default UserSignIn;

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { CourseContext } from '../Context';
 import { useHistory } from 'react-router';
+import ValidationErrors from './ValidationErrors';
 
 
 const CreateCourse = () => {
@@ -68,9 +69,6 @@ const CreateCourse = () => {
             .catch(() => history.push("/error"))
 
 
-          
-
-
     } //end submit function 
 
 
@@ -84,9 +82,9 @@ const CreateCourse = () => {
 
 
     return (
-        <div className="wrap">
+        <div className='wrap'>
             <h2>Create Course</h2>
-            <ErrorsDisplay errors={errors} />
+            <ValidationErrors errors={ errors } />
             <form onSubmit={ handleSubmit }>
                 <div className="main--flex">
                     <div>
@@ -135,26 +133,6 @@ const CreateCourse = () => {
         
     )
 }
-
-// Handle validation erros
-export function ErrorsDisplay({ errors }) {
-    let errorsDisplay = null;
-  
-    if (errors.length) {
-      errorsDisplay = (
-        <div>
-          <h2 className="validation--errors--label">Validation errors</h2>
-          <div className="validation-errors">
-            <ul>
-              {errors.map((error, i) => <li key={i}>{error}</li>)}
-            </ul>
-          </div>
-        </div>
-      );
-    }
-  
-    return errorsDisplay;
-  }
 
 
 export default CreateCourse;
