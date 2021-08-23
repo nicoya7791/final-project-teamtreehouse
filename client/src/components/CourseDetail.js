@@ -20,14 +20,14 @@ import ValidationErrors from './ValidationErrors';
 
     // fetch course details strore results in courseDetail
     useEffect( () => {
-        console.log('fetching course detail');
         context.data.getCourse(id)
         .then( response => {
             if (response){
                 setCourseDetail(response)
                 setUser(response.User)
             } else {
-                history.push('/NotFound')
+                console.log(response);
+                history.push('/NotFound');
             }
         })
         .catch( () => history.push('/error'));
@@ -43,7 +43,6 @@ import ValidationErrors from './ValidationErrors';
                 if (errors.length) {
                     setErrors(errors)
                 } else {
-                    console.log(`course id:${id} deleted`)
                     history.push('/')
                 }
             })
