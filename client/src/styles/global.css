@@ -239,3 +239,34 @@ input:focus, button:focus, .button:focus, textarea:focus {
         display: inline-block;
     }
 }
+
+/* customize css  */
+
+body {
+    background:#f7f6eb;
+}
+.course--module{
+    background:#3d95bb;
+}
+.button{
+    background:#eb4240;
+    color: white
+}
+.button-secondary{
+    background: #eb4240;
+    color: white
+}
+
+.course--add--module{
+    color: white;
+    background: rgb(119, 204, 147);
+}
+header{
+    background: #3A3634;
+}
+.course--detail--title, .course--name {
+    color: #eb4240 ;
+}
+/* .course--author{ */
+    /* color: #999900; */
+/* } */

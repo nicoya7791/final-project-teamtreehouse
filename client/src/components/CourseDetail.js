@@ -82,7 +82,7 @@ import ValidationErrors from './ValidationErrors';
                         <div>
                             <h3 className='course--detail--title'>Course</h3>
                             <h4 className='course--name'>{ courseDetail.title }</h4>
-                            <p>By { user.firstName +' ' + user.lastName }</p>
+                            <p className='course--author'>By { user.firstName +' ' + user.lastName }</p>
                             <ReactMarkdown>{ courseDetail.description }</ReactMarkdown>
                         </div>
                         <div>
