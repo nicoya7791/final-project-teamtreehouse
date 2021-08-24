@@ -12,7 +12,6 @@ import { CourseContext } from '../Context';
 
      // courseArray will hold all courses data.
      const [coursesArray, setCoursesArray] = useState([]);
-    console.log(coursesArray);
 
     //  fetch courses list
      useEffect(() => {

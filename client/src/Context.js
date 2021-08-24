@@ -46,7 +46,6 @@ export class CourseContextProvider extends Component {
     * @return {name, username}- example: Henry, nicoya00
     */
     signIn = async (username, password) => {
-      console.log('from context sign in call');
       const user = await this.data.getUser(username, password);
       if (user !== null) {
         this.setState(()=>{
@@ -72,7 +71,6 @@ export class CourseContextProvider extends Component {
 
     // Signs out the user and set delete cookies
     signOut = () => {
-      console.log('sign out from context');
         this.setState(()=> {
           return{
             authenticatedUser: null,

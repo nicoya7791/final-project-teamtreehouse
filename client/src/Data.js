@@ -29,7 +29,6 @@ export default class Data {
   async getUser(username, password) {
     const response = await this.api('/users', 'GET', null, true, {username, password});
     if (response.status === 200) {
-      console.log('from data: get user called' );
       return response.json().then(data => data);
     }
     else if (response.status === 401) {
@@ -97,7 +96,6 @@ export default class Data {
    */
   async createCourse (course, username, password) {
     const response = await this.api('/courses', 'POST', course, true, { username, password });
-    console.log('create course from data.js');
     if (response.status === 201) {
       return [];
     } else if ( response.status === 400) {
@@ -113,7 +111,6 @@ export default class Data {
    */
   async updateCourse (course, id, username, password) {
     const response = await this.api(`/courses/${id}`, 'PUT', course, true, { username, password } );
-    console.log('id:'+id);
 
     if (response.status === 204) {
       return [];

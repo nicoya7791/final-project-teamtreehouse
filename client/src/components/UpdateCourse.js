@@ -11,7 +11,6 @@ const UpdateCourse = () => {
     const password = authenticatedUser.password;
     const username = authenticatedUser.emailAddress;
     const userId = authenticatedUser.userId;
-    console.log(password+ " " + username);
 
     const history = useHistory();
 
@@ -29,7 +28,6 @@ const UpdateCourse = () => {
 
             // fetch course details strore results in courseDetail
     useEffect( () => {
-        console.log('fetching data to update');
         context.data.getCourse(id)
         .then( response => {
             if (response && response.userId === userId){
@@ -72,7 +70,6 @@ const UpdateCourse = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('submit update course');
 
         const course = {
             title: courseTitle,

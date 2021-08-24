@@ -36,19 +36,23 @@ import ValidationErrors from './ValidationErrors';
 
     // Delete course only if course belongs to user and user is authenticated.
     const handleDeleteCourse = () =>{
-        console.log('handle delete called');
         const { emailAddress, password} = authenticatedUser;
-        context.data.deleteCourse(id, emailAddress, password)
-            .then((errors) => {
-                if (errors.length) {
-                    setErrors(errors)
-                } else {
-                    history.push('/')
-                }
-            })
-            .catch((err) =>{
-                console.log('Error:', err);
-            });
+        let result = window.confirm(`Do you want to delete ${courseDetail.title} course?`);
+            if(result){
+                context.data.deleteCourse(id, emailAddress, password)
+                .then((errors) => {
+                    if (errors.length) {
+                        setErrors(errors)
+                    } else {
+                        history.push('/')
+                    }
+                })
+                .catch((err) =>{
+                    console.log('Error:', err);
+                });
+    
+
+        }
 
     }
 
