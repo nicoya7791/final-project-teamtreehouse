@@ -3,8 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { CourseContext } from '../Context';
 import ValidationErrors from './ValidationErrors';
 
-const UserSignIn = (props) => {
 
+const UserSignIn = (props) => {
     // context and histroy hooks initialized 
     const context = useContext(CourseContext);
     const history = useHistory();
@@ -14,7 +14,7 @@ const UserSignIn = (props) => {
     const [ password, setPassword] = useState('');
     const [ errors, setErrors ] = useState([]);
     
-    
+    // update credential varibles base on user input
     function changeInputValue(event) {
         const inputValue = event.target.value;
 
@@ -30,27 +30,23 @@ const UserSignIn = (props) => {
           }
       }       
       
+      // Signs in the user. 
       const handleSubmit = (event) => {
         event.preventDefault();
-          console.log('sign in sumbit event called')
           const { from } = props.location.state || { from: { pathname: '/' } };
-          
-          // const { from } = history.location.state || { from: history.goBack() };// this line need to be fixed
           context.actions.signIn(username, password)
             .then( user => {
               if( user === null) {
                 setErrors(['Sign-in was unsuccessful']);
               } else {
-                console.log(props);
                 history.push(from);
-                console.log('Your are now singed In');
               }
             })
             .catch(()=> history.push('/error'));
 
       }
 
-      // cancel
+      // cancel. redirect to home page.
       const handleCancel = (event) => {
         event.preventDefault();
         history.push('/');

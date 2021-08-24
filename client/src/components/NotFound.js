@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Displays friendly message if the route is not found.
 const NotFound = () => {
 
   return (

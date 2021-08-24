@@ -9,7 +9,7 @@ const UserSignUP = () => {
 
     const history = useHistory();
 
-    // State
+    // State variables to create new user.
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
@@ -17,6 +17,7 @@ const UserSignUP = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
+    // Update state variables bese on user input.
     const change = (event) => {
         const value = event.target.value;
         switch (event.target.name) {
@@ -40,8 +41,7 @@ const UserSignUP = () => {
         }
       }
 
-    console.log('name:'+ firstName);
-
+    // submits new user paylaod if password and confirm password are a match.
     const handleSubmit = (event) => {
       event.preventDefault();
             // Create user
@@ -60,7 +60,6 @@ const UserSignUP = () => {
             if (errors.length) {
               setErrors(errors)
             } else {
-              console.log('user signed up succesfully');
               context.actions.signIn(emailAddress, password)
                 .then(() => {
                   console.log(user);
@@ -70,7 +69,7 @@ const UserSignUP = () => {
           })
           .catch((err) => {
             console.log(err);
-           // context.history.push('/error');
+           context.history.push('/error');
           });
   
         }

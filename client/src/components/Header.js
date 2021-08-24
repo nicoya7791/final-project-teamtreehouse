@@ -1,11 +1,10 @@
 import React, { useContext } from  'react';
 import { CourseContext } from '../Context';
 
-// Renders the header of the page
+// Conditional rendering of header base on user authentication.
 const Header = () => {
     const context = useContext(CourseContext);
     const { authenticatedUser} = context;
-    console.log('from header user auth: '+authenticatedUser)
     return (
         <header>
             <div className="wrap header--flex">

@@ -42,7 +42,7 @@ const UpdateCourse = () => {
                 history.push('/forbidden');
             }
             if(!response){
-                history.push('/');
+                history.push('/NotFound');
             }
         })
         .catch( () => history.push('/error'));

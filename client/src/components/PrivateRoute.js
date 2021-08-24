@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Consumer } from '../Context';
 
+// renders component with properties if the user is authenticated. I not authenticated user then redirects to signIn page.
 const PrivateRoutes = ({ component: Component, ...rest }) => {
   return (
     <Consumer>

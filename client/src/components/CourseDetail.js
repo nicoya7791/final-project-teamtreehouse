@@ -4,8 +4,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'
 import ValidationErrors from './ValidationErrors';
 
+// Displays course detail.
  const CourseDetail = () => {
-     // context and histroy hooks initialized 
+     // context and histroy variables initialized 
      const context = useContext(CourseContext);
      const history = useHistory();
      const { authenticatedUser } = context;
@@ -18,7 +19,7 @@ import ValidationErrors from './ValidationErrors';
 
      
 
-    // fetch course details strore results in courseDetail
+    // fetch course details stores results in courseDetail. Also gets user data.
     useEffect( () => {
         context.data.getCourse(id)
         .then( response => {
@@ -26,7 +27,6 @@ import ValidationErrors from './ValidationErrors';
                 setCourseDetail(response)
                 setUser(response.User)
             } else {
-                console.log(response);
                 history.push('/NotFound');
             }
         })
@@ -34,7 +34,7 @@ import ValidationErrors from './ValidationErrors';
             
     }, [context.data, history, id]);
 
-    // Delete course
+    // Delete course only if course belongs to user and user is authenticated.
     const handleDeleteCourse = () =>{
         console.log('handle delete called');
         const { emailAddress, password} = authenticatedUser;
@@ -52,7 +52,7 @@ import ValidationErrors from './ValidationErrors';
 
     }
 
-
+    //  Conditional rendering. If user owns the course, Update course and Delete course button will be available.
     return (
         <React.Fragment>
             <div className='actions--bar'>

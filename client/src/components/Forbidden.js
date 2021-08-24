@@ -1,5 +1,6 @@
 import React from "react";
 
+// Displays frindly message is user is not authorize certain task( like, delete someone else course ).
 const Forbidden = () => {
 
     return (

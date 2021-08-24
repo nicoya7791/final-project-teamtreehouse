@@ -10,13 +10,12 @@ import { CourseContext } from '../Context';
     //history object
      const history = useHistory();
 
-     // course will hold  course data
+     // courseArray will hold all courses data.
      const [coursesArray, setCoursesArray] = useState([]);
     console.log(coursesArray);
 
     //  fetch courses list
      useEffect(() => {
-         console.log('fetching course titles');
          context.data.getCourses()
             .then( data => setCoursesArray(data.courseData))
             .catch(() => history.push('/'));

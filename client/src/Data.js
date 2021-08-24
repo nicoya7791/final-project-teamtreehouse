@@ -63,7 +63,6 @@ export default class Data {
   // Get list of courses
   async getCourses() {
     const response = await this.api('/courses', 'GET');
-    console.log('get courses success from data.js');
 
     if (response.status === 200) {
       return response.json().then(data => data);

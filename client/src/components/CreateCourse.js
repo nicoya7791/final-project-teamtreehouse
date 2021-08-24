@@ -22,7 +22,7 @@ const CreateCourse = () => {
     const [errors, setErrors] = useState([]);
     
 
-
+    //  Sets course data value base on user input. Updates courses variable.
     const change = (event) => {
         const value = event.target.value;
         switch (event.target.name) {
@@ -43,6 +43,7 @@ const CreateCourse = () => {
         }
     }
 
+    // Submits course payload and crate a new course. Uses authenticated User.
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('submit create course');
@@ -57,7 +58,6 @@ const CreateCourse = () => {
 
 
             //call create course api
-        
             context.data.createCourse(course, username, password )
             .then(errors => {
                 if (errors.length) {
@@ -75,7 +75,7 @@ const CreateCourse = () => {
 
 
 
-
+    // cancels task returns user to home page.
     const handleCancel =() => {
         history.push('/');
     }

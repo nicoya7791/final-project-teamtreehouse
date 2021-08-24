@@ -1,5 +1,6 @@
 import React from "react";
 
+// Handles the displays of friendly message for errors array.
 const ValidationErrors = ({errors}) => {
     let errorsDisplay = null;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Displays friendly message for unhandle erros.
 const UnhandleError = () => {
 
   return (
