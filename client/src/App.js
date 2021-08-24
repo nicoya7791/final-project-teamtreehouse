@@ -25,6 +25,7 @@ function App() {
           <PrivateRoute path='/courses/create' component={ CreateCourse } />
           <PrivateRoute path='/courses/:id/update' component={ UpdateCourse } />
           <Route path='/courses/:id' component={ CourseDetail } />
+          <Route path="/notfound" component={NotFound} />
           <Route path='/signin' component={ UserSignIn } />
           <Route path='/signup' component={ UserSignUP} />
           <Route path='/signout' component={ UserSignOut } />

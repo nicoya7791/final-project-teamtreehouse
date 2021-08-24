@@ -27,7 +27,7 @@ import ValidationErrors from './ValidationErrors';
                 setCourseDetail(response)
                 setUser(response.User)
             } else {
-                history.push('/NotFound');
+                history.push('/notfound');
             }
         })
         .catch( () => history.push('/error'));
@@ -50,7 +50,6 @@ import ValidationErrors from './ValidationErrors';
                 .catch((err) =>{
                     console.log('Error:', err);
                 });
-    
 
         }
 
