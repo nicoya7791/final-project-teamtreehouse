@@ -75,7 +75,8 @@ const CreateCourse = () => {
 
 
     // cancels task returns user to home page.
-    const handleCancel =() => {
+    const handleCancel =(e) => {
+        e.preventDefault();
         history.push('/');
     }
 

@@ -23,7 +23,7 @@ import { CourseContext } from '../Context';
      // Map throught the courses array and display title with a link to course detail.
      let courseList = coursesArray.map( (course, index) => (
         <a key={index} className='course--module course--link' href={`/courses/${course.id}`} > 
-            <h2 className='course--label'>Course</h2> */
+            <h2 className='course--label'>Course</h2> 
             <h3 className='course--title'>{course.title}</h3>
         </a>
      ));

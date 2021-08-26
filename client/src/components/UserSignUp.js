@@ -77,7 +77,8 @@ const UserSignUP = () => {
         
     }// END submit.
 
-    const handleCancel = () => {
+    const handleCancel = (e) => {
+        e.preventDefault();
         history.push('/');
     }
 
