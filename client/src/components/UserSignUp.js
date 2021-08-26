@@ -52,28 +52,30 @@ const UserSignUP = () => {
             password,
         }   
 
-        if( password !== confirmPassword) {
-          setErrors(['Passwords your entered do not match'])
+        if(password !== confirmPassword){
+          setErrors(['Passwords do not match']);
         } else {
-          context.data.createUser(user)
-          .then( errors => {
-            if (errors.length) {
-              setErrors(errors)
-            } else {
-              context.actions.signIn(emailAddress, password)
-                .then(() => {
-                  console.log(user);
-                  history.push('/');    
-                });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-           context.history.push('/error');
-          });
+            context.data.createUser(user)
+            .then( errors => {
+              if (errors.length) {
+                setErrors(errors)
+              } else {
+                context.actions.signIn(emailAddress, password)
+                  .then(() => {
+                    console.log(user);
+                    history.push('/');    
+                  });
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+             context.history.push('/error');
+            });
+
+          }
   
-        }
-    }
+        
+    }// END submit.
 
     const handleCancel = () => {
         history.push('/');

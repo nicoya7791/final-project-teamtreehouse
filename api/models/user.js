@@ -64,8 +64,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       set(val) {
-        const hashedPassword = bcrypt.hashSync(val, 10);
-        this.setDataValue('password', hashedPassword);
+        // https://stackoverflow.com/questions/154059/how-can-i-check-for-an-empty-undefined-null-string-in-javascript
+        if (val && !/^\s*$/.test(val)) {
+          const hashedPassword = bcrypt.hashSync(val, 10);
+          this.setDataValue('password', hashedPassword);
+        }
       },
     },
 

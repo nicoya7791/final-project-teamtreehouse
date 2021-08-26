@@ -46,7 +46,6 @@ const CreateCourse = () => {
     // Submits course payload and crate a new course. Uses authenticated User.
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('submit create course');
 
         const course = {
             title: courseTitle,
