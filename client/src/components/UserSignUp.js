@@ -67,9 +67,8 @@ const UserSignUP = () => {
                   });
               }
             })
-            .catch((err) => {
-              console.log(err);
-             context.history.push('/error');
+            .catch(() => {
+             history.push('/error');
             });
 
           }

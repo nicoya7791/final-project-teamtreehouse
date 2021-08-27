@@ -92,9 +92,6 @@ const UpdateCourse = () => {
             .catch(() => history.push("/error"))
 
 
-          
-
-
     } //end submit function 
 
 

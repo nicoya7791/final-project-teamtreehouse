@@ -78,8 +78,8 @@ export default class Data {
    * @returns course detail
    */
   async getCourse(id) {
+    
     const response = await this.api(`/courses/${id}`, 'GET');
-
     if (response.status === 200) {
       return response.json().then(data => data);
     } else if (response.status === 404) {
@@ -110,7 +110,6 @@ export default class Data {
    */
   async updateCourse (course, id, username, password) {
     const response = await this.api(`/courses/${id}`, 'PUT', course, true, { username, password } );
-
     if (response.status === 204) {
       return [];
     } else if ( response.status === 400) {
@@ -123,7 +122,7 @@ export default class Data {
 
    /**
   * @param {course, username, password} 
-  * @returns updated course
+  * @returns Delete course
   */
   async deleteCourse (id, username, password) {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { username, password});

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { CourseContext } from '../Context';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'
 import ValidationErrors from './ValidationErrors';
 
@@ -40,20 +40,21 @@ import ValidationErrors from './ValidationErrors';
         let result = window.confirm(`Do you want to delete ${courseDetail.title} course?`);
             if(result){
                 context.data.deleteCourse(id, emailAddress, password)
-                .then((errors) => {
+                .then(errors => {
                     if (errors.length) {
-                        setErrors(errors)
+                        setErrors(errors);
                     } else {
-                        history.push('/')
+                        history.push("/");
                     }
                 })
-                .catch((err) =>{
-                    console.log('Error:', err);
+                .catch(() => {
+                    history.push("/error")
                 });
 
-        }
 
-    }
+        } 
+
+    } // END handle delete;
 
     //  Conditional rendering. If user owns the course, Update course and Delete course button will be available.
     return (
@@ -62,9 +63,9 @@ import ValidationErrors from './ValidationErrors';
                 <div className='wrap'>
                 { authenticatedUser && authenticatedUser.userId === courseDetail.userId ? (
                     <React.Fragment>
-                        <a className='button' href={`/courses/${id}/update`}>Update Course</a>
-                        <a className='button' onClick={ handleDeleteCourse } href='/'>Delete Course</a>
-                        <a className='button button-secondary'  href='/'>Return to List</a>
+                        <Link className='button' to={`/courses/${id}/update`}>Update Course</Link>
+                        <Link className='button' onClick={ handleDeleteCourse } to="#">Delete Course </Link>
+                        <Link className='button button-secondary'  to='/'>Return to List</Link>
                     </React.Fragment>
                 ):(
                     <React.Fragment>

@@ -6,7 +6,6 @@ import { CourseContext } from '../Context';
 
  const Courses = () => {
      const context = useContext(CourseContext);
-
     //history object
      const history = useHistory();
 
@@ -17,7 +16,7 @@ import { CourseContext } from '../Context';
      useEffect(() => {
          context.data.getCourses()
             .then( data => setCoursesArray(data.courseData))
-            .catch(() => history.push('/'));
+            .catch(() => history.push('/error'));
      }, [context.data, history]);
 
      // Map throught the courses array and display title with a link to course detail.
